@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひだまりカフェ</title>
+  <!-- 落ち着いた雰囲気のフォント（日本語＋英語） -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== 色の設定（ここを変えると全体の色が変わります） ===== */
+    :root {
+      --beige: #f4eee4;        /* 背景のベージュ */
+      --beige-dark: #e8dece;   /* 少し濃いベージュ */
+      --card: #fbf8f3;         /* カードの白っぽいベージュ */
+      --brown: #6b4f3a;        /* 文字や見出しのブラウン */
+      --brown-dark: #4a3628;   /* 濃いブラウン */
+      --green: #8a9a7b;        /* くすみグリーン */
+      --green-light: #dfe4d6;  /* うすいくすみグリーン */
+      --text: #4a3f37;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Meiryo", sans-serif;
+      color: var(--text);
+      background: var(--beige);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--brown); }
+
+    .en {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      letter-spacing: 0.12em;
+    }
+
+    .inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== ヘッダー ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 238, 228, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--beige-dark);
+    }
+    header .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--brown-dark);
+      text-decoration: none;
+    }
+    .logo span { color: var(--green); }
+    nav ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--brown);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    nav a:hover { border-color: var(--green); }
+
+    /* ===== トップ（写真とキャッチコピー） ===== */
+    .hero {
+      position: relative;
+      height: 78vh;
+      min-height: 420px;
+      max-height: 720px;
+      overflow: hidden;
+      background: var(--beige-dark);
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+    }
+    .hero::after {
+      /* 写真の上にうすい色をのせて、文字を読みやすくする */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(74, 54, 40, 0.55), rgba(74, 54, 40, 0.05) 60%);
+    }
+    .hero-text {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 48px;
+      z-index: 1;
+      color: #fbf8f3;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero-text .en {
+      display: block;
+      font-size: 1.1rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+    .hero-text h1 {
+      margin: 4px 0 0;
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+    }
+
+    /* ===== 共通：各コーナー ===== */
+    section { padding: 88px 0; }
+    .section-title {
+      text-align: center;
+      margin: 0 0 48px;
+    }
+    .section-title .en {
+      display: block;
+      font-size: 2.2rem;
+      color: var(--brown-dark);
+      line-height: 1.2;
+    }
+    .section-title .ja {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--green);
+      margin-top: 6px;
+    }
+    .section-title::after {
+      /* 小さな葉っぱのような線 */
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      margin: 16px auto 0;
+      background: var(--green);
+      border-radius: 2px;
+    }
+
+    /* ===== お店の紹介 ===== */
+    .about-text {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about-text p { margin: 0 0 1.4em; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .feature {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      border: 1px solid var(--beige-dark);
+    }
+    .feature .icon { font-size: 1.8rem; }
+    .feature h3 {
+      margin: 8px 0 6px;
+      font-size: 1rem;
+      color: var(--brown-dark);
+    }
+    .feature p { margin: 0; font-size: 0.9rem; }
+
+    /* ===== メニュー ===== */
+    #menu { background: var(--green-light); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .menu-box {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 32px 28px;
+    }
+    .menu-box h3 {
+      margin: 0 0 16px;
+      font-size: 1.1rem;
+      color: var(--brown-dark);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .menu-box h3 .en { font-size: 1.3rem; color: var(--green); }
+    .menu-list { list-style: none; margin: 0; padding: 0; }
+    .menu-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--beige-dark);
+    }
+    .menu-list li:last-child { border-bottom: none; }
+    .menu-list .name { flex: 0 1 auto; }  /* 幅が足りないときは、説明文を折り返す */
+    .menu-list .dots { flex: 1; }
+    .menu-list .price { flex-shrink: 0; color: var(--brown); font-weight: 500; }
+    .menu-list small {
+      display: block;
+      font-size: 0.78rem;
+      color: #8a7d72;
+      line-height: 1.5;
+    }
+    .menu-photo {
+      margin: 0 0 24px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--beige-dark);
+      aspect-ratio: 4 / 3;
+    }
+    .menu-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+    .note {
+      margin: 24px 0 0;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #6f655c;
+    }
+
+    /* ===== 営業時間 ===== */
+    .hours {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 1px solid var(--beige-dark);
+    }
+    .hours table { width: 100%; border-collapse: collapse; }
+    .hours th, .hours td {
+      padding: 14px 8px;
+      border-bottom: 1px solid var(--beige-dark);
+      text-align: left;
+    }
+    .hours th { color: var(--brown-dark); font-weight: 500; width: 40%; }
+    .hours tr:last-child th, .hours tr:last-child td { border-bottom: none; }
+    .closed { color: var(--green); font-weight: 500; }
+    .hours .memo { margin: 16px 0 0; font-size: 0.85rem; }
+
+    /* ===== フッター ===== */
+    footer {
+      background: var(--brown-dark);
+      color: #e8dece;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    footer .logo { color: #fbf8f3; font-size: 1.5rem; }
+    footer .logo span { color: var(--green-light); }
+    footer a { color: #e8dece; }
+    .credits {
+      margin: 24px auto 0;
+      max-width: 640px;
+      font-size: 0.72rem;
+      line-height: 1.7;
+      opacity: 0.75;
+    }
+
+    /* 写真が読みこめなかったとき */
+    .img-error {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      background: var(--beige-dark);
+      color: var(--brown);
+      font-size: 0.9rem;
+    }
+
+    /* ===== スマホ用（画面がせまいとき） ===== */
+    @media (max-width: 720px) {
+      header .inner { height: auto; flex-direction: column; padding-top: 10px; padding-bottom: 8px; }
+      nav ul { gap: 18px; }
+      .hero { height: 60vh; min-height: 360px; }
+      .hero-text h1 { font-size: 1.5rem; letter-spacing: 0.12em; }
+      section { padding: 64px 0; }
+      .section-title .en { font-size: 1.8rem; }
+      .about-text { text-align: left; }
+      .features { grid-template-columns: 1fr; gap: 14px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 24px; }
+      .menu-box, .hours { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header>
+    <div class="inner">
+      <a href="#" class="logo">ひだまり<span>カフェ</span></a>
+      <nav>
+        <ul>
+          <li><a href="#about">お店について</a></li>
+          <li><a href="#menu">メニュー</a></li>
+          <li><a href="#hours">営業時間</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== トップ ===== -->
+  <div class="hero">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Manual_drip_%28pour-over%29_coffee.jpg/1280px-Manual_drip_%28pour-over%29_coffee.jpg"
+      alt="ドリップポットで、ていねいにコーヒーをいれているところ"
+      onerror="this.outerHTML='&lt;div class=&quot;img-error&quot;&gt;写真を読みこめませんでした&lt;/div&gt;'">
+    <div class="hero-text">
+      <span class="en">a warm spot in the sun</span>
+      <h1>おいしいコーヒーと手作りスイーツで、ほっとひと息</h1>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===== お店の紹介 ===== -->
+    <section id="about">
+      <div class="inner">
+        <h2 class="section-title">
+          <span class="en">About</span>
+          <span class="ja">お店について</span>
+        </h2>
+        <div class="about-text">
+          <p>
+            「ひだまり」は、お日さまの光があたって、ぽかぽかとあたたかい場所のこと。<br>
+            そんな場所のように、ほっとできる時間をお届けしたくて、このお店をはじめました。
+          </p>
+          <p>
+            コーヒーは一杯ずつ、ハンドドリップでていねいに。<br>
+            スイーツは毎朝、お店で手づくりしています。
+          </p>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <div class="icon">☕</div>
+            <h3>ハンドドリップ</h3>
+            <p>注文を受けてから豆をひき、一杯ずつ、ていねいにいれます。</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🍰</div>
+            <h3>手づくりスイーツ</h3>
+            <p>季節の素材を使って、毎朝お店で焼きあげています。</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🌿</div>
+            <h3>木のぬくもり</h3>
+            <p>木の家具とグリーンにかこまれた、静かな店内です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== メニュー ===== -->
+    <section id="menu">
+      <div class="inner">
+        <h2 class="section-title">
+          <span class="en">Menu</span>
+          <span class="ja">メニュー</span>
+        </h2>
+
+        <div class="menu-grid">
+          <!-- ドリンク -->
+          <div class="menu-box">
+            <h3><span class="en">Drink</span>ドリンク</h3>
+            <ul class="menu-list">
+              <li><span class="name">ひだまりブレンド<small>やさしい苦みの、お店の定番</small></span><span class="dots"></span><span class="price">¥550</span></li>
+              <li><span class="name">本日のシングルオリジン<small>その日おすすめの豆で</small></span><span class="dots"></span><span class="price">¥650</span></li>
+              <li><span class="name">カフェラテ</span><span class="dots"></span><span class="price">¥600</span></li>
+              <li><span class="name">ほうじ茶ラテ</span><span class="dots"></span><span class="price">¥600</span></li>
+              <li><span class="name">アイスコーヒー</span><span class="dots"></span><span class="price">¥550</span></li>
+              <li><span class="name">自家製レモネード</span><span class="dots"></span><span class="price">¥580</span></li>
+            </ul>
+          </div>
+
+          <!-- スイーツ -->
+          <div class="menu-box">
+            <h3><span class="en">Sweets</span>スイーツ</h3>
+            <figure class="menu-photo">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Hojicha_Basque_Cheesecake_-_MOGUMOGU_2024-11-02.jpg/960px-Hojicha_Basque_Cheesecake_-_MOGUMOGU_2024-11-02.jpg"
+                alt="白いお皿にのった、ほうじ茶のバスクチーズケーキ"
+                loading="lazy"
+                onerror="this.outerHTML='&lt;div class=&quot;img-error&quot;&gt;写真を読みこめませんでした&lt;/div&gt;'">
+            </figure>
+            <ul class="menu-list">
+              <li><span class="name">ほうじ茶バスクチーズケーキ<small>人気No.1。香ばしくて、なめらか</small></span><span class="dots"></span><span class="price">¥580</span></li>
+              <li><span class="name">季節のタルト</span><span class="dots"></span><span class="price">¥620</span></li>
+              <li><span class="name">焼きたてスコーン（2個）</span><span class="dots"></span><span class="price">¥480</span></li>
+              <li><span class="name">ガトーショコラ</span><span class="dots"></span><span class="price">¥550</span></li>
+              <li><span class="name">いちごのショートケーキ<small>ふわふわのスポンジに、甘酸っぱいいちごをたっぷり使った手作りケーキ</small></span><span class="dots"></span><span class="price">¥550</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="note">※ 価格はすべて税込みです。 ／ ドリンクとスイーツのセットは 100円引き。</p>
+      </div>
+    </section>
+
+    <!-- ===== 営業時間 ===== -->
+    <section id="hours">
+      <div class="inner">
+        <h2 class="section-title">
+          <span class="en">Hours</span>
+          <span class="ja">営業時間</span>
+        </h2>
+        <div class="hours">
+          <table>
+            <tr><th>月・水・木・金</th><td>10:00 〜 18:00</td></tr>
+            <tr><th>土・日・祝日</th><td>9:00 〜 19:00</td></tr>
+            <tr><th>定休日</th><td class="closed">火曜日</td></tr>
+          </table>
+          <p class="memo">☕ ラストオーダーは、閉店の30分前です。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer>
+    <div class="inner">
+      <div class="logo">ひだまり<span>カフェ</span></div>
+      <p>おいしいコーヒーと手作りスイーツで、ほっとひと息</p>
+      <p class="credits">
+        写真：
+        <a href="https://commons.wikimedia.org/wiki/File:Manual_drip_(pour-over)_coffee.jpg" target="_blank" rel="noopener">Kim Sanso</a>（CC0）、
+        <a href="https://commons.wikimedia.org/wiki/File:Hojicha_Basque_Cheesecake_-_MOGUMOGU_2024-11-02.jpg" target="_blank" rel="noopener">Andy Li</a>（CC0）／ Wikimedia Commons
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

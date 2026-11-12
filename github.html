@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>はじめてのGitHub</title>
+  <!-- まるっこくて読みやすいフォント（index.html と同じもの） -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== 色の設定（ここを変えると全体の色が変わります） ===== */
+    :root {
+      --pink: #ff8fb1;
+      --pink-light: #ffe3ec;
+      --mint: #a8e6cf;
+      --mint-light: #e6f8ef;
+      --yellow: #fff3b0;
+      --purple: #cdb4ff;
+      --text: #5a4a52;
+      --bg: #fff7fa;
+      --card: #ffffff;
+      --code-bg: #3b3238;
+      --code-text: #fdf3f7;
+      --line: #f3d6e0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px 16px 48px;
+      font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      /* 水玉もよう */
+      background-image: radial-gradient(var(--pink-light) 20%, transparent 21%),
+                        radial-gradient(var(--pink-light) 20%, transparent 21%);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      line-height: 1.8;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; }
+
+    /* ===== いちばん上のタイトル ===== */
+    .hero {
+      background: var(--card);
+      border: 3px solid var(--pink);
+      border-radius: 32px;
+      padding: 36px 24px 28px;
+      text-align: center;
+      box-shadow: 0 8px 0 var(--pink-light), 0 12px 30px rgba(255, 143, 177, 0.25);
+    }
+    .hero .icon {
+      font-size: 56px;
+      animation: fuwafuwa 3s ease-in-out infinite;
+    }
+    @keyframes fuwafuwa {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero h1 { margin: 8px 0 8px; font-size: 2rem; color: var(--pink); letter-spacing: 0.05em; }
+    .hero p { margin: 0; }
+
+    /* ===== 風景の写真 ===== */
+    .photo {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 12px 12px 8px;
+      margin: 24px 0 0;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+    .photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2048 / 1626;
+      object-fit: cover;
+      border-radius: 16px;
+      background: var(--mint-light);
+    }
+    .photo figcaption {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 8px 4px 4px;
+    }
+    .photo .credit { display: block; font-size: 0.75rem; opacity: 0.7; }
+    .photo-error {
+      padding: 40px 16px;
+      text-align: center;
+      background: var(--mint-light);
+      border-radius: 16px;
+    }
+
+    /* ===== もくじ ===== */
+    .toc {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+    .toc h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    .toc ol { margin: 0; padding-left: 1.5em; }
+    .toc a { color: var(--text); text-decoration: none; border-bottom: 2px dotted var(--pink); }
+    .toc a:hover { color: var(--pink); }
+
+    /* ===== 各章のカード ===== */
+    .section {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 24px;
+      margin-top: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: 1.3rem;
+      display: inline-block;
+      padding: 2px 16px;
+      border-radius: 999px;
+      background: var(--pink-light);
+    }
+    .section:nth-of-type(3n+1) h2 { background: var(--mint); }
+    .section:nth-of-type(3n+2) h2 { background: var(--yellow); }
+    .section:nth-of-type(3n)   h2 { background: var(--purple); }
+
+    .section h3 {
+      margin: 20px 0 6px;
+      font-size: 1.05rem;
+      color: var(--pink);
+    }
+    .section p { margin: 8px 0; }
+    .section ul, .section ol { margin: 8px 0; padding-left: 1.5em; }
+    .section li { margin: 2px 0; }
+    strong { color: #e0608a; }
+
+    /* ===== 表（スマホでは横にスクロールできる） ===== */
+    .table-wrap { overflow-x: auto; margin: 12px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      min-width: 480px;
+    }
+    th, td {
+      border-bottom: 2px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--pink-light); }
+
+    /* ===== ひとことメモ ===== */
+    .tip, .point {
+      border-radius: 16px;
+      padding: 10px 16px;
+      margin: 12px 0;
+    }
+    .tip   { background: var(--yellow); }
+    .point { background: var(--mint-light); }
+
+    /* ===== ✕ / ○ の例 ===== */
+    .ng { color: #c0506e; }
+    .ok { color: #2f8a5f; }
+
+    /* ===== コマンドの例 ===== */
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    code { font-family: Consolas, "Courier New", monospace; }
+    p code, li code, td code {
+      background: var(--pink-light);
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+    .comment { color: #c9b6bf; }
+
+    a { color: #e0608a; }
+
+    /* ===== さいごのひとこと ===== */
+    .ending {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.15rem;
+      margin-top: 32px;
+    }
+
+    /* ===== 「クリックしてね！」ボタン ===== */
+    .cheer { text-align: center; margin-top: 16px; }
+    .cheer-button {
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      background: var(--pink);
+      border: none;
+      border-radius: 999px;
+      padding: 12px 32px;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #e0608a;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .cheer-button:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #e0608a; }
+    .cheer-button:active { transform: translateY(4px); box-shadow: 0 2px 0 #e0608a; }
+    .cheer-message {
+      margin: 20px auto 0;
+      display: inline-block;
+      background: var(--yellow);
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .cheer-message.show { opacity: 1; transform: scale(1); }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .section { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== タイトル ===== -->
+    <header class="hero">
+      <div class="icon">🔰</div>
+      <h1>はじめてのGitHub</h1>
+      <p>GitHub（ギットハブ）をはじめて使う人のための、やさしい説明メモです。</p>
+    </header>
+
+    <!-- ===== 風景の写真（パブリックドメイン） ===== -->
+    <figure class="photo">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg/1280px-Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg"
+        alt="雪をかぶったフッド山と、その姿がうつる静かなミラー湖"
+        loading="lazy"
+        onerror="this.outerHTML='&lt;div class=&quot;photo-error&quot;&gt;🏔️ 写真を読みこめませんでした&lt;/div&gt;'">
+      <figcaption>
+        🏞️ フッド山とミラー湖（アメリカ・オレゴン州）
+        <span class="credit">
+          写真：Oregon's Mt. Hood Territory ／ パブリックドメイン ／
+          <a href="https://commons.wikimedia.org/wiki/File:Mount_Hood_reflected_in_Mirror_Lake,_Oregon.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+        </span>
+      </figcaption>
+    </figure>
+
+    <!-- ===== もくじ ===== -->
+    <nav class="toc">
+      <h2>📖 もくじ</h2>
+      <ol>
+        <li><a href="#s1">GitHubってなに？</a></li>
+        <li><a href="#s2">GitとGitHubのちがい</a></li>
+        <li><a href="#s3">よく出てくる言葉</a></li>
+        <li><a href="#s4">基本の使い方</a></li>
+        <li><a href="#s5">GitHubでできる便利なこと</a></li>
+        <li><a href="#s6">上手に使うコツ</a></li>
+        <li><a href="#s7">こまったときは</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===== 1章 ===== -->
+    <section class="section" id="s1">
+      <h2>1. GitHubってなに？</h2>
+      <p><strong>インターネット上にある「ファイルの置き場所」と「変更の記録帳」がセットになったサービス</strong>です。</p>
+      <p>おもにプログラムのファイルを置くために使われますが、文章やメモなど、ふつうのファイルも置けます。</p>
+      <p>たとえば、こんなことができます。</p>
+      <ul>
+        <li>作ったファイルを、ネット上に保存しておく（バックアップ）</li>
+        <li>「いつ・だれが・どこを変えたか」をあとから見られる</li>
+        <li>前の状態に戻せる</li>
+        <li>ほかの人と、同じファイルをいっしょに作れる</li>
+      </ul>
+      <div class="tip">💡 イメージとしては、<strong>「変更履歴が全部残る、みんなで使えるクラウドのフォルダ」</strong>です。</div>
+    </section>
+
+    <!-- ===== 2章 ===== -->
+    <section class="section" id="s2">
+      <h2>2. GitとGitHubのちがい</h2>
+      <p>名前が似ていて、まぎらわしいところです。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th></th><th>Git（ギット）</th><th>GitHub（ギットハブ）</th></tr>
+          <tr><td>なにか</td><td>変更を記録する<strong>道具（ソフト）</strong></td><td>Gitで記録したものを置く<strong>ネット上の場所（サービス）</strong></td></tr>
+          <tr><td>どこで動く</td><td>自分のパソコンの中</td><td>インターネット上</td></tr>
+          <tr><td>たとえると</td><td>日記帳</td><td>日記帳をしまっておく、みんなで見られる本棚</td></tr>
+        </table>
+      </div>
+      <div class="point">👉 <strong>Gitで記録して、GitHubに置く</strong>、という関係です。</div>
+    </section>
+
+    <!-- ===== 3章 ===== -->
+    <section class="section" id="s3">
+      <h2>3. よく出てくる言葉</h2>
+      <p>最初はこの5つを覚えておけば大丈夫です。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>言葉</th><th>かんたんに言うと</th><th>例</th></tr>
+          <tr><td><strong>リポジトリ</strong></td><td>ファイルを入れる「箱」（プロジェクトのフォルダ）</td><td>「買い物アプリ」用のリポジトリ</td></tr>
+          <tr><td><strong>コミット</strong></td><td>変更を「記録する」こと（セーブ）</td><td>「見出しを追加した」と記録する</td></tr>
+          <tr><td><strong>プッシュ</strong></td><td>自分のパソコンの記録を、GitHubに「送る」こと</td><td>パソコン → GitHub</td></tr>
+          <tr><td><strong>プル</strong></td><td>GitHubの最新の内容を、自分のパソコンに「持ってくる」こと</td><td>GitHub → パソコン</td></tr>
+          <tr><td><strong>ブランチ</strong></td><td>本体とは別に作る「おためし用の道」</td><td>本体をこわさずに新しい機能を試す</td></tr>
+        </table>
+      </div>
+      <div class="tip">💡 ゲームにたとえると、<strong>コミット＝セーブ</strong>、<strong>ブランチ＝別のセーブデータで寄り道</strong>です。</div>
+    </section>
+
+    <!-- ===== 4章 ===== -->
+    <section class="section" id="s4">
+      <h2>4. 基本の使い方</h2>
+      <p>まずは、ブラウザ（Chromeなど）だけでできる流れを紹介します。</p>
+
+      <h3>① アカウントを作る</h3>
+      <ol>
+        <li><a href="https://github.com" target="_blank" rel="noopener">https://github.com</a> を開く</li>
+        <li><strong>Sign up</strong>（登録）を押す</li>
+        <li>メールアドレス・パスワード・ユーザー名を入れる</li>
+      </ol>
+
+      <h3>② リポジトリ（箱）を作る</h3>
+      <ol>
+        <li>右上の <strong>＋</strong> ボタン → <strong>New repository</strong> を選ぶ</li>
+        <li>名前を入れる（例：<code>my-first-repo</code>）</li>
+        <li><strong>Public</strong>（だれでも見られる）か <strong>Private</strong>（自分だけ）を選ぶ</li>
+        <li><strong>Create repository</strong> を押す</li>
+      </ol>
+
+      <h3>③ ファイルを入れる</h3>
+      <ol>
+        <li>作ったリポジトリを開く</li>
+        <li><strong>Add file</strong> → <strong>Upload files</strong> を選ぶ</li>
+        <li>ファイルをドラッグして、下の <strong>Commit changes</strong> を押す</li>
+      </ol>
+      <div class="point">👉 これで、ファイルがGitHubに保存されました！</div>
+
+      <h3>パソコンから使う場合（慣れてきたら）</h3>
+      <p>ターミナル（黒い画面）では、こんなコマンドを使います。</p>
+<pre><code>git add .                     <span class="comment"># 変更したファイルを記録の準備に入れる</span>
+git commit -m "見出しを追加"  <span class="comment"># 変更を記録する（コミット）</span>
+git push                      <span class="comment"># GitHubに送る（プッシュ）</span></code></pre>
+    </section>
+
+    <!-- ===== 5章 ===== -->
+    <section class="section" id="s5">
+      <h2>5. GitHubでできる便利なこと</h2>
+      <div class="table-wrap">
+        <table>
+          <tr><th>できること</th><th>うれしいポイント</th></tr>
+          <tr><td>バックアップ</td><td>パソコンがこわれても、ファイルが残る</td></tr>
+          <tr><td>変更履歴を見る</td><td>「いつ・どこを変えたか」がすぐわかる</td></tr>
+          <tr><td>前の状態に戻す</td><td>失敗しても、やり直せる</td></tr>
+          <tr><td>みんなで作業</td><td>同じファイルを複数人で直せる</td></tr>
+          <tr><td>作品を公開する</td><td>自分の作ったものを、世界中の人に見てもらえる</td></tr>
+          <tr><td>ほかの人のコードを見る</td><td>公開されているプログラムを読んで勉強できる</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== 6章 ===== -->
+    <section class="section" id="s6">
+      <h2>6. 上手に使うコツ</h2>
+      <ol>
+        <li><strong>こまめにコミットする</strong>
+          <ul>
+            <li class="ng">✕ 1週間分の変更を、まとめて1回で記録</li>
+            <li class="ok">○ ひとつ直すたびに記録</li>
+          </ul>
+        </li>
+        <li><strong>コミットのメッセージをわかりやすく書く</strong>
+          <ul>
+            <li class="ng">✕「修正」</li>
+            <li class="ok">○「トップページの文字の色を青に変更」</li>
+          </ul>
+        </li>
+        <li><strong>見られたくないものは置かない</strong>
+          <ul>
+            <li>パスワードや個人情報は、リポジトリに入れない</li>
+            <li>迷ったら <strong>Private</strong> にしておく</li>
+          </ul>
+        </li>
+        <li><strong>作業を始める前にプルする</strong>
+          <ul>
+            <li>ほかの人の変更を先に持ってきておくと、ぶつかりにくい</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== 7章 ===== -->
+    <section class="section" id="s7">
+      <h2>7. こまったときは</h2>
+      <ul>
+        <li>😵 <strong>言葉の意味がわからない</strong> → 「<a href="#s3">3. よく出てくる言葉</a>」を見返す</li>
+        <li>🔙 <strong>前の状態に戻したい</strong> → ファイルの <strong>History</strong>（履歴）から、昔の内容を確認できる</li>
+        <li>⚠️ <strong>パスワードなどを公開してしまった</strong> → すぐにそのパスワードを変更する（ファイルを消すだけでは、履歴に残っています）</li>
+        <li>💥 <strong>プッシュでエラーが出た</strong> → 先に <code>git pull</code> で最新の内容を持ってきてから、もう一度プッシュする</li>
+        <li>❓ <strong>どうしてもわからない</strong> → エラーの文章をそのままコピーして、Claudeに「これはどういう意味？」と聞く</li>
+      </ul>
+    </section>
+
+    <p class="ending">まずはリポジトリを1つ作って、ファイルを置いてみましょう！ 🎉</p>
+
+    <!-- ===== 「クリックしてね！」ボタン ===== -->
+    <div class="cheer">
+      <button type="button" class="cheer-button" id="cheerButton">クリックしてね！</button>
+      <br>
+      <p class="cheer-message" id="cheerMessage" aria-live="polite"></p>
+    </div>
+
+  </div>
+
+  <script>
+    // ボタンを押したら、メッセージをふわっと表示する
+    document.getElementById("cheerButton").addEventListener("click", function () {
+      var message = document.getElementById("cheerMessage");
+      message.textContent = "GitHubの勉強、がんばろう！ 💪";
+      message.classList.remove("show");
+      void message.offsetWidth; // もう一度押したときも、アニメーションさせるため
+      message.classList.add("show");
+    });
+  </script>
+</body>
+</html>
