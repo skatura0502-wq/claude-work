@@ -4,6 +4,11 @@
     "allow": [
       "Bash(git status *)"
     ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git -C * push*)",
+      "Bash(git -c * push*)"
+    ],
     "deny": [
       "Read(**/.env)",
       "Read(**/.env.local)",
@@ -21,10 +26,7 @@
       "Edit(**/.env.staging)",
       "Edit(**/.env.test)",
       "Edit(**/secrets/**)",
-      "Bash(git diff *--no-index*)",
-      "Bash(git push *)",
-      "Bash(git -C * push*)",
-      "Bash(git -c * push*)"
+      "Bash(git diff *--no-index*)"
     ]
   }
 }
