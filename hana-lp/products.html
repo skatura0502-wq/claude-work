@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>商品一覧｜花のある暮らし（練習用）</title>
+  <meta name="description" content="花束、アレンジメント、季節の花。「花のある暮らし」でお選びいただける商品の一覧です。（練習用サイト）">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Parisienne&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ヘッダー（index.html と同じ） -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">花のある暮らし</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="global-nav">
+        <span class="menu-toggle-bar"></span>
+        <span class="visually-hidden">メニューを開く</span>
+      </button>
+
+      <nav class="global-nav" id="global-nav" aria-label="メインメニュー">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="products.html" aria-current="page">商品一覧</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ・ご注文</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ページの見出し -->
+    <section class="page-header">
+      <div class="container">
+        <h1>商品一覧</h1>
+        <p>贈り物にも、ご自宅に飾るお花にも。気になる商品が見つかったら、お気軽にお問い合わせください。</p>
+      </div>
+    </section>
+
+    <!-- カテゴリ切り替え（押すとそのカテゴリへ移動） -->
+    <nav class="category-nav" aria-label="商品のカテゴリ">
+      <div class="container">
+        <ul>
+          <li><a href="#bouquet">花束</a></li>
+          <li><a href="#arrangement">アレンジメント</a></li>
+          <li><a href="#seasonal">季節の花</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 花束 -->
+    <section class="section" id="bouquet">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Bouquet</p>
+          <h2>花束</h2>
+        </div>
+        <p class="section-lead">手渡しの贈り物にぴったりの花束です。</p>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <img src="images/ひまわりとバラの花束.png" alt="花束「ほほえみ」のイメージ（ひまわりと白いバラの花束）" width="1275" height="1234" loading="lazy">
+            <span class="badge">おすすめ</span>
+            <h3 class="product-name">花束「ほほえみ」</h3>
+            <p class="product-text">淡いピンクとクリーム色の花をまとめた花束。誕生日やお礼の気持ちに。</p>
+            <p class="product-price">3,850円<small>（税込）</small></p>
+          </article>
+
+          <article class="product-card">
+            <img src="images/パリ風の優雅な薔薇ブーケ-1.png" alt="花束「ときめき」のイメージ（ピンクと白のバラの花束）" width="1448" height="1086" loading="lazy">
+            <h3 class="product-name">花束「ときめき」</h3>
+            <p class="product-text">ピンクと白のバラを包んだ華やかな花束。記念日のお祝いに。</p>
+            <p class="product-price">5,500円<small>（税込）</small></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- アレンジメント -->
+    <section class="section section--products" id="arrangement">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Arrangement</p>
+          <h2>アレンジメント</h2>
+        </div>
+        <p class="section-lead">花瓶がなくても、そのまま飾れるアレンジメントです。</p>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <img src="images/青と淡緑の紫陽花バスケット.png" alt="アレンジメント「ひだまり」のイメージ（かごに生けた青と淡い緑の紫陽花）" width="1199" height="1312" loading="lazy">
+            <span class="badge">おすすめ</span>
+            <h3 class="product-name">アレンジメント「ひだまり」</h3>
+            <p class="product-text">花瓶がいらない、そのまま飾れるアレンジ。お祝いやお見舞いに。</p>
+            <p class="product-price">4,400円<small>（税込）</small></p>
+          </article>
+
+          <article class="product-card">
+            <img src="images/優雅な白い蘭と紫陽花の花瓶生け-2.png" alt="アレンジメント「しずく」のイメージ（白い胡蝶蘭と紫陽花のアレンジメント）" width="1448" height="1086" loading="lazy">
+            <h3 class="product-name">アレンジメント「しずく」</h3>
+            <p class="product-text">白い胡蝶蘭と紫陽花の上品なアレンジ。開店祝いや改まった贈り物に。</p>
+            <p class="product-price">6,600円<small>（税込）</small></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 季節の花 -->
+    <section class="section" id="seasonal">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Seasonal</p>
+          <h2>季節の花</h2>
+        </div>
+        <p class="section-lead">その時期いちばんきれいな花でおつくりします。</p>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <img src="images/ラベンダーと白花の優雅なフラワーアレンジメント.png" alt="季節のおまかせ一輪ブーケのイメージ（ラベンダー色と白の季節の花）" width="1024" height="1536" loading="lazy">
+            <span class="badge">おすすめ</span>
+            <h3 class="product-name">季節のおまかせ一輪ブーケ</h3>
+            <p class="product-text">その時期いちばんきれいな花を、小さなブーケにしてお届け。ご自宅用に。</p>
+            <p class="product-price">1,650円<small>（税込）</small></p>
+          </article>
+
+          <article class="product-card">
+            <img src="images/秋色の豪華なフラワーアレンジメント-3.png" alt="秋色アレンジ「あかね」のイメージ（ワインレッドのダリアとオレンジのバラ）" width="1448" height="1086" loading="lazy">
+            <h3 class="product-name">秋色アレンジ「あかね」</h3>
+            <p class="product-text">ダリアとバラを使った、深い秋色のアレンジ。季節の贈り物に。</p>
+            <p class="product-price">4,950円<small>（税込）</small></p>
+          </article>
+        </div>
+
+        <p class="note">※商品・価格は練習用の仮のものです。季節によって花の種類や色が変わります。</p>
+      </div>
+    </section>
+
+    <!-- 最後の誘導 -->
+    <section class="cta">
+      <div class="container">
+        <h2>どんなお花にしようか、迷ったら</h2>
+        <p>「予算はこのくらい」「やさしい色で」など、ざっくりしたご希望でも大丈夫です。お気軽にお声がけください。</p>
+        <a class="btn btn--primary" href="contact.html">お問い合わせ・ご注文はこちら</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター（index.html と同じ） -->
+  <footer class="site-footer">
+    <div class="container">
+      <a class="logo" href="index.html">花のある暮らし</a>
+      <p class="footer-catch">毎日に、花のある小さなしあわせを。</p>
+      <nav class="footer-nav" aria-label="フッターメニュー">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="products.html" aria-current="page">商品一覧</a></li>
+          <li><a href="contact.html">お問い合わせ・ご注文</a></li>
+        </ul>
+      </nav>
+      <p class="footer-practice">※このサイトは練習用です</p>
+    </div>
+  </footer>
+
+</body>
+</html>

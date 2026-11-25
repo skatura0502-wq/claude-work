@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>お問い合わせ・ご注文｜花のある暮らし（練習用）</title>
+  <meta name="description" content="花選びのご相談、ご注文、お届けについてのご質問はこちらから。オンラインの花屋「花のある暮らし」のお問い合わせページです。（練習用サイト）">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Parisienne&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ヘッダー（index.html と同じ） -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">花のある暮らし</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="global-nav">
+        <span class="menu-toggle-bar"></span>
+        <span class="visually-hidden">メニューを開く</span>
+      </button>
+
+      <nav class="global-nav" id="global-nav" aria-label="メインメニュー">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="products.html">商品一覧</a></li>
+          <li><a class="nav-cta" href="contact.html" aria-current="page">お問い合わせ・ご注文</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ページの見出し -->
+    <section class="page-header">
+      <div class="container">
+        <h1>お問い合わせ・ご注文</h1>
+        <p>花選びのご相談、ご注文、お届けについてのご質問など、お気軽にお送りください。2営業日以内にメールでお返事いたします。</p>
+      </div>
+    </section>
+
+    <!-- フォーム -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Contact</p>
+          <h2>お問い合わせフォーム</h2>
+        </div>
+
+        <form class="contact-form" id="contact-form" action="#" method="post">
+          <div class="form-group">
+            <label for="inquiry-type">お問い合わせの種類 <span class="required">必須</span></label>
+            <select id="inquiry-type" name="inquiry-type" required>
+              <option value="">選んでください</option>
+              <option value="order">ご注文</option>
+              <option value="consult">花選びのご相談</option>
+              <option value="delivery">お届けについて</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="name">お名前 <span class="required">必須</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="例）花野 さくら" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">メールアドレス <span class="required">必須</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="例）hana@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tel">電話番号 <span class="optional">任意</span></label>
+            <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例）090-1234-5678" aria-describedby="tel-hint">
+            <p class="form-hint" id="tel-hint">お急ぎの場合や、お届け日のご確認にお電話することがあります。</p>
+          </div>
+
+          <div class="form-group">
+            <label for="product">ご希望の商品 <span class="optional">任意</span></label>
+            <select id="product" name="product" aria-describedby="product-hint">
+              <option value="">選んでください</option>
+              <option value="hohoemi">花束「ほほえみ」（3,850円）</option>
+              <option value="tokimeki">花束「ときめき」（5,500円）</option>
+              <option value="hidamari">アレンジメント「ひだまり」（4,400円）</option>
+              <option value="shizuku">アレンジメント「しずく」（6,600円）</option>
+              <option value="ichirin">季節のおまかせ一輪ブーケ（1,650円）</option>
+              <option value="akane">秋色アレンジ「あかね」（4,950円）</option>
+              <option value="undecided">まだ決めていない・相談したい</option>
+            </select>
+            <p class="form-hint" id="product-hint">商品は<a href="products.html">商品一覧</a>でご覧いただけます。</p>
+          </div>
+
+          <div class="form-group">
+            <label for="delivery-date">お届け希望日 <span class="optional">任意</span></label>
+            <input type="date" id="delivery-date" name="delivery-date" aria-describedby="date-hint">
+            <p class="form-hint" id="date-hint">ご注文の場合は、3日後以降の日付をお選びください。</p>
+          </div>
+
+          <div class="form-group">
+            <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+            <textarea id="message" name="message" placeholder="例）母の誕生日に、5,000円くらいでやさしい色の花束をお願いしたいです。" required></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button class="btn btn--primary btn--submit" type="submit">送信する</button>
+          </div>
+
+          <p class="practice-notice">※このサイトは練習用です。フォームに入力しても、実際には送信されません。</p>
+        </form>
+
+        <!-- 送信後のメッセージ（ふだんは隠しておく） -->
+        <div class="form-thanks" id="form-thanks" hidden tabindex="-1">
+          <h3>お問い合わせありがとうございました</h3>
+          <p>内容を確認のうえ、2営業日以内にメールでお返事いたします。</p>
+          <p>※このサイトは練習用のため、実際には送信されていません。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- よくあるご質問 -->
+    <section class="section section--beige">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">FAQ</p>
+          <h2>よくあるご質問</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>注文してから、どのくらいで届きますか？</summary>
+            <div class="faq-answer">
+              <p>ご注文から3日後以降の、ご希望の日にお届けします。お急ぎの場合は、フォームの内容欄にご記入ください。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>予算や色だけ伝えて、おまかせできますか？</summary>
+            <div class="faq-answer">
+              <p>はい、できます。「5,000円くらいで、やさしい色で」など、ざっくりしたご希望でも大丈夫です。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>メッセージカードは付けられますか？</summary>
+            <div class="faq-answer">
+              <p>無料でお付けできます。お問い合わせ内容の欄に、カードに書く文章をご記入ください。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター（index.html と同じ） -->
+  <footer class="site-footer">
+    <div class="container">
+      <a class="logo" href="index.html">花のある暮らし</a>
+      <p class="footer-catch">毎日に、花のある小さなしあわせを。</p>
+      <nav class="footer-nav" aria-label="フッターメニュー">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="products.html">商品一覧</a></li>
+          <li><a href="contact.html" aria-current="page">お問い合わせ・ご注文</a></li>
+        </ul>
+      </nav>
+      <p class="footer-practice">※このサイトは練習用です</p>
+    </div>
+  </footer>
+
+  <!-- 練習用：送信はせず、フォームを「ありがとうございました」に切り替えるだけ -->
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      var thanks = document.getElementById('form-thanks');
+      if (!form || !thanks) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault(); // 実際には送信しない
+        form.hidden = true;
+        thanks.hidden = false;
+        thanks.focus();
+      });
+    })();
+  </script>
+
+</body>
+</html>

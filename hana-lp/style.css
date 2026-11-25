@@ -1,0 +1,1392 @@
+@charset "UTF-8";
+
+/* ==========================================================
+   花のある暮らし 共通スタイル（style.css）
+   ※ Google Fonts（Shippori Mincho / Parisienne / Noto Sans JP）は HTML 側で読み込みます
+   ※ Parisienne は英字専用。日本語には使わない
+   ※ 2026-11-18 パリの花屋風に変更（元の版：hana-lp-backup-20261118-paris）
+   ※ 2026-11-18 パリの高級フラワーブティック風に変更（直前の版：hana-lp-backup-20261118-boutique）
+   ※ 2026-11-18 文字デザインを変更（直前の版：hana-lp-backup-20261118-typography）
+   ※ 2026-11-21 アイボリー×グリーン×くすみピンクのナチュラルな配色に変更（直前の版：hana-lp-backup-20261121-natural）
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. CSS変数（色・文字・余白・角丸・影）
+   ---------------------------------------------------------- */
+:root {
+  /* 色 */
+  --color-pink: #E6C9C4;        /* くすみピンク：帯・飾り */
+  --color-pink-light: #F6EAE7;  /* ごく薄いピンク：帯の背景など */
+  --color-pink-deep: #A86B72;   /* 濃いめのくすみピンク：大きな英字ラベルだけ（小さい文字には使わない） */
+  --color-green: #4F6B58;       /* 落ち着いたグリーン：ボタン・リンク・価格など（白文字 約5.9:1） */
+  --color-green-dark: #3E5747;  /* ボタンにマウスを乗せたとき */
+  --color-gold: #C9A96E;        /* シャンパンゴールド：細い線のみ（文字には使わない） */
+  --color-gold-light: #E6D6B8;  /* 淡いゴールド：カードの枠など */
+  --color-sage: #9CAF94;        /* 飾り・線のみ（文字には使わない） */
+  --color-sage-light: #E7ECE1;  /* 3つの想いの背景だけに使う */
+  --color-forest: #3A4A40;      /* 深いグリーン：フッター背景（白文字） */
+  --color-bg: #FAF5EC;          /* 温かみのあるアイボリー：基本の背景 */
+  --color-bg-beige: #F3EBDD;    /* 濃いめのアイボリー：交互の背景 */
+  --color-heading: #34463B;     /* 見出し・店名・価格：深いグリーン */
+  --color-text: #4A4644;        /* 本文：落ち着いたグレー */
+  --color-text-sub: #67605D;    /* 補足の文字：明るめのグレー */
+  --color-white: #FFFFFF;
+  --color-border: #D9CFC4;      /* 入力欄の枠 */
+  --color-line: #E8E0D4;        /* 薄い区切り線 */
+
+  /* 文字 */
+  --font-heading: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-accent: "Parisienne", "Times New Roman", cursive; /* 英語のラベル（筆記体風・英字専用） */
+  --font-body: "Noto Sans JP", "Hiragino Sans", "Meiryo", sans-serif;
+
+  /* 余白 */
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 32px;
+  --space-xl: 80px;
+  --section-padding: 120px;     /* セクション上下（スマホは80px） */
+  --content-width: 1160px;      /* 中身の最大幅 */
+  --header-height: 64px;
+
+  /* 角丸 */
+  --radius-s: 8px;              /* 入力欄 */
+  --radius-m: 16px;             /* カード・画像 */
+  --radius-full: 999px;         /* ボタン・ラベル */
+
+  /* 影 */
+  --shadow-soft: 0 2px 12px rgba(63, 58, 54, 0.05);
+  --shadow-hover: 0 6px 20px rgba(63, 58, 54, 0.10);
+
+  /* 控えめな花の飾り（くすみピンクの花びら＋セージの花芯。CSSの中で描く画像） */
+  --ornament-flower: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23D3A7A5'%3E%3Cellipse cx='12' cy='6' rx='3' ry='5'/%3E%3Cellipse cx='12' cy='18' rx='3' ry='5'/%3E%3Cellipse cx='6' cy='12' rx='5' ry='3'/%3E%3Cellipse cx='18' cy='12' rx='5' ry='3'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='2.4' fill='%239CAF94'/%3E%3C/svg%3E");
+}
+
+/* ----------------------------------------------------------
+   2. 基本の設定
+   ---------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: var(--header-height); /* 固定ヘッダーの分だけ下げる */
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--space-m);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  color: var(--color-heading);
+}
+
+h2 { letter-spacing: 0.12em; }
+
+h1 { font-size: 36px; }
+h2 { font-size: 28px; }
+h3 { font-size: 20px; }
+
+p {
+  margin: 0 0 var(--space-m);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-green);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+/* キーボード操作のときに、いまの場所がわかるようにする */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-green);
+  outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------
+   3. container（中身の幅）と section（セクションの余白・背景）
+   ---------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--content-width) + var(--space-l) * 2);
+  margin: 0 auto;
+  padding: 0 var(--space-l);
+}
+
+.section {
+  padding: var(--section-padding) 0;
+}
+
+.section--sage {
+  background-color: var(--color-sage-light);
+}
+
+.section--beige {
+  background-color: var(--color-bg-beige);
+}
+
+.section-header {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
+/* 見出しの下の飾り（— ✿ — ：ゴールドの細い線と小さな花） */
+.section-header::after {
+  content: "";
+  display: block;
+  width: 132px;
+  height: 16px;
+  margin: 18px auto 0;
+  background:
+    var(--ornament-flower) center / 16px 16px no-repeat,
+    linear-gradient(var(--color-gold), var(--color-gold)) left center / 50px 1px no-repeat,
+    linear-gradient(var(--color-gold), var(--color-gold)) right center / 50px 1px no-repeat;
+}
+
+.section-lead {
+  max-width: 640px;
+  margin: 0 auto 48px; /* 説明文と商品のあいだをゆったりと */
+  color: var(--color-text-sub);
+  text-align: center;
+}
+
+/* ----------------------------------------------------------
+   4. section-label（見出し上の英語ラベル）と細い線の飾り
+   ---------------------------------------------------------- */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 var(--space-s);
+  font-family: var(--font-accent);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--color-pink-deep);
+}
+
+/* 細い線の飾り（— Recommend —：シャンパンゴールド） */
+.section-label::before,
+.section-label::after {
+  content: "";
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+
+/* ----------------------------------------------------------
+   5. ヘッダー（上部固定・下に薄線）
+   ---------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-gold-light);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 400; /* 細く美しい明朝体 */
+  letter-spacing: 0.18em;
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+/* ヘッダー（左上）の店名だけ約1.3倍に。フッターの店名は変えない */
+.site-header .logo {
+  font-size: 28px;
+  line-height: 1.4;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+.global-nav ul {
+  display: flex;
+  align-items: center;
+  gap: var(--space-l);
+  list-style: none;
+}
+
+.global-nav a {
+  display: inline-block;
+  padding: var(--space-s) 0;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.global-nav a:hover {
+  color: var(--color-green);
+}
+
+/* 今いるページに下線 */
+.global-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+/* 「お問い合わせ・ご注文」だけ小さいボタンの形 */
+.global-nav a.nav-cta {
+  padding: var(--space-s) 20px;
+  background-color: var(--color-green);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
+  line-height: 1.5;
+}
+
+.global-nav a.nav-cta:hover {
+  background-color: var(--color-green-dark);
+  color: var(--color-white);
+}
+
+.global-nav a.nav-cta[aria-current="page"] {
+  text-decoration-color: var(--color-white);
+  text-underline-offset: 4px;
+}
+
+/* ----------------------------------------------------------
+   6. スマホメニュー（三本線ボタン）
+      ※ PCでは隠し、767px以下で表示（下の「スマホ用の指定」を参照）
+   ---------------------------------------------------------- */
+.menu-toggle {
+  display: none;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 三本線（真ん中の線＋上下の線） */
+.menu-toggle-bar,
+.menu-toggle-bar::before,
+.menu-toggle-bar::after {
+  position: absolute;
+  left: 12px;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-toggle-bar {
+  top: 23px;
+}
+
+.menu-toggle-bar::before,
+.menu-toggle-bar::after {
+  content: "";
+  left: 0;
+}
+
+.menu-toggle-bar::before { top: -8px; }
+.menu-toggle-bar::after  { top: 8px; }
+
+/* 開いているときは「×」の形にする */
+.menu-toggle[aria-expanded="true"] .menu-toggle-bar {
+  background-color: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-bar::before {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-bar::after {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 画面には出さず、読み上げソフトにだけ伝える文字 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ----------------------------------------------------------
+   7. ボタン（btn）
+   ---------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 40px;
+  border: 1px solid var(--color-green);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* メインボタン：落ち着いたグリーン背景・白文字 */
+.btn--primary {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-green-dark);
+  box-shadow: var(--shadow-hover);
+}
+
+/* サブボタン：透明な背景・グリーンの細い枠と文字。マウスを乗せるとグリーンで塗りつぶす */
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-green);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ボタンを横に並べるとき */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+}
+
+.btn-center {
+  margin-top: var(--space-l);
+  text-align: center;
+}
+
+/* ----------------------------------------------------------
+   8. ラベル（badge：「おすすめ」「季節限定」）
+   ---------------------------------------------------------- */
+.badge {
+  display: inline-block;
+  padding: 2px 14px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-full);
+  color: var(--color-green);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+}
+
+/* ----------------------------------------------------------
+   9. 仮の画像（placeholder-img）
+      写真ができたら <img> に差し替える
+   ---------------------------------------------------------- */
+.placeholder-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-m);
+  background: linear-gradient(135deg, var(--color-pink), var(--color-bg-beige));
+  color: var(--color-text-sub);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.placeholder-img::after {
+  content: "Photo coming soon";
+}
+
+/* カテゴリごとの色 */
+.placeholder-img--bouquet {
+  background: linear-gradient(135deg, var(--color-pink), var(--color-bg));
+}
+
+.placeholder-img--arrangement {
+  background: linear-gradient(135deg, var(--color-sage-light), var(--color-bg));
+}
+
+.placeholder-img--seasonal {
+  background: linear-gradient(135deg, var(--color-bg-beige), var(--color-pink));
+}
+
+/* ファーストビュー用（横長） */
+.placeholder-img--hero {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--color-pink), var(--color-sage-light));
+}
+
+/* ファーストビューの写真（仮の画像と同じ 4:3 の枠に合わせて切りそろえる） */
+.hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+  /* 少し離した位置にゴールドの細い枠（額縁のような雰囲気） */
+  outline: 1px solid var(--color-gold);
+  outline-offset: 12px;
+}
+
+/* ----------------------------------------------------------
+   10. 商品カード（product-card）
+       PC 3列／スマホ 2列
+   ---------------------------------------------------------- */
+/* 商品一覧の部分だけ、少し温かみのあるアイボリーの背景にする */
+.section--products {
+  background-color: #F8F0E3;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  list-style: none;
+}
+
+/* 商品が2つだけの段（商品一覧ページ）は、右が空かないよう2列で中央にそろえる */
+.product-grid:has(> :nth-child(2):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 24px 24px 28px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gold-light);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+/* マウスを乗せると、カード全体がふわっと少し浮く */
+.product-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.product-card .placeholder-img,
+.product-card img {
+  margin-bottom: var(--space-m);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+}
+
+/* 写真：少し縦長（4:5）。白い余白＋淡いゴールドの細い枠で、写真が引き立つ控えめな額縁に */
+.product-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 24px;
+  padding: 6px;
+  aspect-ratio: 4 / 5;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gold-light);
+  border-radius: var(--radius-s);
+}
+
+.product-card .badge {
+  position: absolute;
+  top: 38px;
+  left: 38px;
+}
+
+/* 商品名：明朝体・文字の間隔を広く・下にゴールドの短い飾り線 */
+.product-name {
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.product-name::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1px;
+  margin: 12px auto 0;
+  background-color: var(--color-gold);
+}
+
+/* 説明は2行まで表示 */
+.product-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: var(--space-s);
+  color: var(--color-text-sub);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 価格：深いグリーン・明朝体 */
+.product-price {
+  margin: var(--space-s) 0 0;
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.product-price small {
+  margin-left: 2px;
+  color: var(--color-text-sub);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* 商品一覧の下のボタン：丸く、幅広で文字の間隔をゆったりと */
+.section--products .btn-center {
+  margin-top: 56px;
+}
+
+.section--products .btn-center .btn {
+  min-width: 280px;
+  letter-spacing: 0.16em;
+}
+
+.product-card .btn {
+  margin-top: auto; /* ボタンをカードの下にそろえる */
+  width: 100%;
+  padding-left: var(--space-m);
+  padding-right: var(--space-m);
+}
+
+/* ----------------------------------------------------------
+   11. ファーストビュー（hero）
+       PCは画像が右、スマホは文章の下
+   ---------------------------------------------------------- */
+.hero {
+  padding: var(--section-padding) 0;
+  background-color: var(--color-bg);
+}
+
+/* 文章4：写真6 で写真を大きく見せる */
+.hero .container {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.hero-title {
+  font-size: 36px;
+}
+
+.hero-text {
+  margin-bottom: var(--space-l);
+  line-height: 2;
+  color: var(--color-text-sub);
+}
+
+/* ----------------------------------------------------------
+   12. 3つの想い（features）：番号つき
+   ---------------------------------------------------------- */
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-l);
+  list-style: none;
+}
+
+.feature-item {
+  padding: var(--space-l);
+  background-color: var(--color-white);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.feature-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-m);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+.feature-item p {
+  margin-bottom: 0;
+  color: var(--color-text-sub);
+  text-align: left;
+}
+
+/* ----------------------------------------------------------
+   13. こんなときに（scenes）：写真と文章が左右交互に並ぶ
+       PC：2列（2段目だけ左右を入れ替え）／スマホ：縦並び（写真→文章）
+   ---------------------------------------------------------- */
+.scene-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.scene-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 72px;
+}
+
+/* 2段目：左に文章、右に写真 */
+.scene-row--reverse .scene-media {
+  order: 2;
+}
+
+/* 写真（仮の画像・本物の写真ともに）：横4:3・角を少し丸く */
+.placeholder-img--scene,
+.scene-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.placeholder-img--scene {
+  display: flex;
+  background: linear-gradient(135deg, var(--color-pink-light), var(--color-bg));
+}
+
+/* 英語の小さなラベル（筆記体風） */
+.scene-label {
+  margin: 0 0 4px;
+  font-family: var(--font-accent);
+  font-size: 30px;
+  line-height: 1.3;
+  color: var(--color-pink-deep);
+}
+
+/* 見出し：明朝体・深いグリーン・下にゴールドの短い飾り線 */
+.scene-title {
+  margin-bottom: 24px;
+  font-size: 26px;
+  letter-spacing: 0.12em;
+}
+
+.scene-title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin-top: 20px;
+  background-color: var(--color-gold);
+}
+
+.scene-body p:last-child {
+  margin-bottom: 0;
+  line-height: 2;
+}
+
+/* ----------------------------------------------------------
+   14. ご利用の流れ（flow）：選ぶ→注文→お届け
+   ---------------------------------------------------------- */
+.flow-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-l);
+  list-style: none;
+  counter-reset: flow;
+}
+
+.flow-item {
+  position: relative;
+  padding: var(--space-l);
+  background-color: var(--color-white);
+  border-top: 2px solid var(--color-gold);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  counter-increment: flow;
+}
+
+/* 番号（1・2・3）を丸い札で表示 */
+.flow-item::before {
+  content: counter(flow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto var(--space-m);
+  background-color: var(--color-green);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.flow-item p {
+  margin-bottom: 0;
+  color: var(--color-text-sub);
+  text-align: left;
+}
+
+/* ----------------------------------------------------------
+   15. 最後の誘導（cta）：pink系の帯
+   ---------------------------------------------------------- */
+.cta {
+  padding: var(--section-padding) 0;
+  background-color: var(--color-pink-light);
+  border-top: 1px solid var(--color-gold);
+  border-bottom: 1px solid var(--color-gold);
+  text-align: center;
+}
+
+.cta p {
+  max-width: 640px;
+  margin: 0 auto var(--space-l);
+}
+
+/* ----------------------------------------------------------
+   16. 下層ページの見出し（page-header）
+   ---------------------------------------------------------- */
+.page-header {
+  padding: 56px 0;
+  background-color: var(--color-bg-beige);
+  text-align: center;
+}
+
+.page-header p {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--color-text-sub);
+}
+
+/* ----------------------------------------------------------
+   17. カテゴリ切り替え（category-nav）
+   ---------------------------------------------------------- */
+.category-nav {
+  padding: var(--space-l) 0 0;
+}
+
+.category-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-m);
+  list-style: none;
+}
+
+.category-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 24px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-green);
+  border-radius: var(--radius-full);
+  color: var(--color-green);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.category-nav a:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+/* ページ内リンクで移動したとき、固定ヘッダーに見出しが隠れないようにする */
+[id] {
+  scroll-margin-top: calc(var(--header-height) + var(--space-m));
+}
+
+/* ----------------------------------------------------------
+   18. フォーム（contact-form）
+   ---------------------------------------------------------- */
+.contact-form,
+.form-thanks {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: var(--space-l);
+}
+
+.form-group label,
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
+  font-weight: 500;
+}
+
+.required,
+.optional {
+  display: inline-block;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* 必須ラベル：グリーン */
+.required {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+/* 任意ラベル：控えめ */
+.optional {
+  background-color: var(--color-bg-beige);
+  color: var(--color-text-sub);
+}
+
+.form-hint {
+  margin: 4px 0 0;
+  color: var(--color-text-sub);
+  font-size: 14px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-s);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px; /* スマホで勝手に拡大されないよう16px */
+  line-height: 1.6;
+}
+
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #9A8C84;
+}
+
+/* フォーカスでグリーンの枠 */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 3px rgba(79, 107, 88, 0.2);
+}
+
+.form-submit {
+  margin-top: var(--space-l);
+  text-align: center;
+}
+
+/* 送信ボタン：PC 240px／スマホ全幅 */
+.btn--submit {
+  width: 240px;
+}
+
+/* 送信後メッセージ */
+.form-thanks {
+  padding: var(--space-l);
+  background-color: var(--color-sage-light);
+  border-radius: var(--radius-m);
+  text-align: center;
+}
+
+.form-thanks p:last-child {
+  margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------
+   19. よくあるご質問（faq）：details / summary
+   ---------------------------------------------------------- */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: var(--space-m);
+  background-color: var(--color-white);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-soft);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: var(--space-m) 48px var(--space-m) var(--space-m);
+  position: relative;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 頭のグリーンの「Q」 */
+.faq-item summary::before {
+  content: "Q";
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+/* 右端の開閉マーク（＋／−） */
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: var(--space-m);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: var(--color-green);
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-answer {
+  padding: 0 var(--space-m) var(--space-m) calc(var(--space-m) + 26px);
+  color: var(--color-text-sub);
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------
+   20. 練習用の注意書き（practice-notice）と注意書き（note）
+   ---------------------------------------------------------- */
+.practice-notice {
+  max-width: 640px;
+  margin: var(--space-l) auto 0;
+  padding: var(--space-m);
+  background-color: var(--color-white);
+  border: 2px dashed var(--color-green);
+  border-radius: var(--radius-m);
+  color: var(--color-text);
+  font-weight: 500;
+  text-align: center;
+}
+
+.note {
+  margin: var(--space-l) 0 0;
+  color: var(--color-text-sub);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ----------------------------------------------------------
+   21. フッター（深いグリーン背景・白文字・上にゴールドの細線）
+   ---------------------------------------------------------- */
+.site-footer {
+  padding: 56px 0 var(--space-l);
+  background-color: var(--color-forest);
+  border-top: 3px double var(--color-gold);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.site-footer .logo {
+  color: var(--color-white);
+}
+
+.footer-catch {
+  margin: var(--space-s) 0 var(--space-l);
+  font-size: 14px;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-m) var(--space-l);
+  list-style: none;
+  margin-bottom: var(--space-l);
+}
+
+.footer-nav a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.footer-practice {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ----------------------------------------------------------
+   22. タブレット用の指定（画面幅768〜1023px）
+   ---------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* 商品カード：2列 */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  /* 3つの想い・ご利用の流れ：1列で読みやすく */
+  .feature-list,
+  .flow-list {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .scene-row {
+    gap: 40px;
+  }
+}
+
+/* ----------------------------------------------------------
+   23. スマホ用の指定（画面幅767px以下）
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root {
+    --section-padding: 80px;
+    --header-height: 56px;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-l);
+  }
+
+  .section-label {
+    font-size: 26px;
+  }
+
+  .logo {
+    letter-spacing: 0.12em;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    width: 24px;
+  }
+
+  .section-header::after {
+    width: 104px;
+    margin-top: 14px;
+    background-size: 14px 14px, 38px 1px, 38px 1px;
+  }
+
+  .hero-img {
+    outline-offset: 8px;
+  }
+
+  .btn {
+    padding-left: var(--space-l);
+    padding-right: var(--space-l);
+  }
+
+  h1 { font-size: 26px; }
+  h2 { font-size: 22px; }
+  h3 { font-size: 18px; }
+
+  .container {
+    padding: 0 var(--space-m);
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  /* スマホのヘッダーの店名（18px の約1.3倍） */
+  .site-header .logo {
+    font-size: 23px;
+    letter-spacing: 0.15em;
+  }
+
+  /* 三本線ボタンを表示 */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* ナビはふだん隠し、is-open が付いたら表示 */
+  .global-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .global-nav.is-open {
+    display: block;
+  }
+
+  .global-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-s) var(--space-m) var(--space-m);
+  }
+
+  .global-nav li {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .global-nav li:last-child {
+    border-bottom: none;
+    padding-top: var(--space-m);
+  }
+
+  .global-nav a {
+    display: block;
+    padding: 12px 0;
+  }
+
+  .global-nav a.nav-cta {
+    display: flex;
+    justify-content: center;
+    min-height: 48px;
+    align-items: center;
+  }
+
+  /* ファーストビュー：画像を文章の下に */
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: var(--space-l);
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+  }
+
+  /* 商品カード：2列 */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .product-card {
+    padding: 12px 12px 16px;
+  }
+
+  .product-card img {
+    margin-bottom: 14px;
+    padding: 4px;
+  }
+
+  .product-card .badge {
+    top: 20px;
+    left: 20px;
+  }
+
+  .product-name {
+    font-size: 16px;
+    letter-spacing: 0.06em;
+  }
+
+  .product-name::after {
+    margin-top: 8px;
+  }
+
+  /* 説明文：カードが細いので4行まで表示 */
+  .product-text {
+    -webkit-line-clamp: 4;
+  }
+
+  .product-price {
+    font-size: 16px;
+  }
+
+  .product-price small {
+    display: block; /* 狭い幅でも価格がはみ出さないよう「（税込）」を次の行に */
+    margin-left: 0;
+  }
+
+  .section--products .btn-center {
+    margin-top: 40px;
+  }
+
+  .section--products .btn-center .btn {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .product-card .btn {
+    padding-left: var(--space-s);
+    padding-right: var(--space-s);
+    font-size: 14px;
+  }
+
+  /* 3つの想い・ご利用の流れ：1列 */
+  .feature-list,
+  .flow-list {
+    grid-template-columns: 1fr;
+    gap: var(--space-m);
+  }
+
+  .feature-item,
+  .flow-item {
+    padding: var(--space-l) var(--space-m);
+  }
+
+  /* こんなときに：縦並び。どの段も「写真 → 文章」の順 */
+  .scene-rows {
+    gap: 64px;
+  }
+
+  .scene-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .scene-row--reverse .scene-media {
+    order: 0;
+  }
+
+  .scene-label {
+    font-size: 26px;
+  }
+
+  .scene-title {
+    margin-bottom: 18px;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+  }
+
+  .scene-title::after {
+    margin-top: 14px;
+  }
+
+  .page-header {
+    padding: 40px 0;
+  }
+
+  .section-lead {
+    margin-bottom: var(--space-l);
+  }
+
+  /* フッターのリンク：指で押しやすい高さ（44px）に */
+  .footer-nav ul {
+    gap: 0 var(--space-m);
+  }
+
+  .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+  }
+
+  /* 送信ボタン：全幅 */
+  .btn--submit {
+    width: 100%;
+  }
+
+  .form-thanks {
+    padding: var(--space-l) var(--space-m);
+  }
+}
